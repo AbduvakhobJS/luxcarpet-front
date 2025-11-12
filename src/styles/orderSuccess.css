@@ -1,0 +1,154 @@
+/* ====== Order Success Animatsiya ====== */
+.success-overlay {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+}
+
+.checkmark-container {
+  text-align: center;
+  transform: scale(0.9);
+  animation: popUp 0.4s ease forwards;
+}
+
+@keyframes popUp {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* --- Loading (spinning ring) --- */
+.circle-loader {
+  border: 6px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #00b37d;
+  border-radius: 50%;
+  width: 120px;   /* 🔹 avval 90px edi */
+  height: 120px;  /* 🔹 avval 90px edi */
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+  box-shadow: 0 0 25px rgba(0, 179, 125, 0.3);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- Success holati --- */
+.circle-loader.complete {
+  border-color: #00b37d;
+  position: relative;
+  animation: popSuccess 0.5s ease forwards;
+  box-shadow: 0 0 35px rgba(0, 179, 125, 0.5);
+}
+
+@keyframes popSuccess {
+  0% {
+    transform: scale(0.8);
+  }
+  60% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* --- Success checkmark markazda joylashgan versiya --- */
+.checkmark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 60px;
+  border-right: 5px solid #00b37d;
+  border-bottom: 5px solid #00b37d;
+  transform: translate(-50%, -60%) rotate(45deg);
+  opacity: 0;
+  animation: drawCheck 0.5s ease 0.2s forwards;
+}
+
+@keyframes drawCheck {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -60%) rotate(45deg) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -60%) rotate(45deg) scale(1);
+  }
+}
+
+
+/* --- Error holati --- */
+.circle-loader.error {
+  border-color: #ff3b30;
+  animation: shake 0.5s ease;
+  position: relative;
+  box-shadow: 0 0 30px rgba(255, 59, 48, 0.5);
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-8px);
+  }
+  50% {
+    transform: translateX(8px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+}
+
+.crossmark {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 45px;
+  height: 45px;
+}
+
+.crossmark::before,
+.crossmark::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 45px;
+  background-color: #ff3b30;
+  top: 0;
+  left: 20px;
+  border-radius: 5px;
+}
+
+.crossmark::before {
+  transform: rotate(45deg);
+}
+.crossmark::after {
+  transform: rotate(-45deg);
+}

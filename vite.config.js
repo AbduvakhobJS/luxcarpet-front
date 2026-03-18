@@ -3,9 +3,11 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
   server: {
     port: 8001,
-    host: true, // Bu qator Docker/Coolify ichida ishlashi uchun juda muhim!
-  },
+    strictPort: true,
+    host: '0.0.0.0', // Faqat true emas, aynan 0.0.0.0 deb yozing
+    cors: true,       // Brauzer bloklamasligi uchun
+    allowedHosts: ["all"] // Vite 6+ versiyalarda bu muhim bo'lishi mumkin
+  }
 })
